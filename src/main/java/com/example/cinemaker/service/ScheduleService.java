@@ -25,20 +25,7 @@ public class ScheduleService {
         return scheduleRepository.findById(id);
     }
 
-    public void save(Schedule schedule) {
-        Date releaseDate = schedule.getMovie().getReleaseDate();
-        Date startTime = schedule.getTimeStart();
-
-        if (releaseDate != null && startTime != null && releaseDate.after(startTime)) {
-            throw new IllegalArgumentException("La fecha de lanzamiento debe ser anterior al inicio del horario de proyección");
-        }
-
-        if(releaseDate == null){
-            throw new IllegalArgumentException("La fecha de lanzamiento es nula o no existe la película");
-        }
-
-        scheduleRepository.save(schedule);
-    }
+    public void save(Schedule schedule) {scheduleRepository.save(schedule);}
 
     public void delete(Long id) {
         scheduleRepository.deleteById(id);

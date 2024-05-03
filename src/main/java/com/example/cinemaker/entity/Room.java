@@ -1,5 +1,8 @@
 package com.example.cinemaker.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,5 +23,6 @@ public class Room {
     private int capacity;
 
     @OneToMany(mappedBy = "room", orphanRemoval = true)
+    @JsonBackReference
     private List<Schedule> schedules;
 }

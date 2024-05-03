@@ -20,15 +20,6 @@ public class ReservationService {
     public Optional<Reservation> getById(Long id) {return reservationRepository.findById(id);}
 
     public void save(Reservation reservation){
-
-        if(reservation.getSchedule() == null || reservation.getSchedule().getRoom() == null){
-            throw new IllegalArgumentException("La reserva es nula o no existe la sala o el horario");
-        }
-
-        if(reservation.getSchedule().getRoom().getCapacity() < reservation.getNumberOfSeats()){
-            throw new IllegalArgumentException("La cantidad de asientos supera la capacidad de la sala");
-        }
-
         reservationRepository.save(reservation);
     }
 
