@@ -23,7 +23,11 @@ public class Reservation {
     @Column(nullable = false)
     private int numberOfSeats;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "schedule_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "reservation_schedule",
+            joinColumns = @JoinColumn(name = "reservation_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "schedule_id", referencedColumnName = "id")
+    )
     private Schedule schedule;
 }

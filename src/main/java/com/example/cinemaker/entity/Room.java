@@ -23,6 +23,6 @@ public class Room {
     private int capacity;
 
     @OneToMany(mappedBy = "room", orphanRemoval = true)
-    @JsonBackReference
+    @JsonIgnore
     private List<Schedule> schedules;
 }

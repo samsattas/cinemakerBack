@@ -22,13 +22,20 @@ public class Schedule {
     @Column(nullable = false)
     private Date timeEnd;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id", nullable = false)
-    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "schedule_movie",
+            joinColumns = @JoinColumn(name = "schedule_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    )
     private Movie movie;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+        name = "schedule_room",
+        joinColumns = @JoinColumn(name = "schedule_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "room_id", referencedColumnName = "id")
+    )
     private Room room;
 
     @JsonIgnore

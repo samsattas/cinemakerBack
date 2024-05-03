@@ -33,6 +33,6 @@ public class Movie {
     private String image;
 
     @OneToMany(mappedBy = "movie", orphanRemoval = true)
-    @JsonBackReference
+    @JsonIgnore
     private List<Schedule> schedules;
 }
